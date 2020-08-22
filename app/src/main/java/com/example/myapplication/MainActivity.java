@@ -30,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
         forceRTLIfSupported();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("محاسبه حجم تقریبی درخت");
+        setTitle("تخمین حجم درخت");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#5eba7d")));
 
         //testing the model with sample data
-//        double[] inputValues = {40,480,17.4,266};
+//        double[] inputValues = {17.4,266};
 //        double[] prediction=doInference(inputValues);
 //        Log.d("prediction", "hi");
 //        Log.d("prediction", Arrays.toString(prediction));
@@ -68,15 +68,16 @@ public class MainActivity extends AppCompatActivity {
                         Double.parseDouble(perimeterAtBreastHeight.getText().toString()),
                         Double.parseDouble(treeHeight.getText().toString())
                     };
-                    Log.d("inputValues", Arrays.toString(inputValues));
+                    Log.d("me inputValues", Arrays.toString(inputValues));
 
-                    //predict the tree volume bsed on the inut data and store the result in predictedVolume
-                    double[] predictedVolume = predictVolume(inputValues);
+                    //predict the tree volume based on the input data and store the result in predictedVolume
+                    double[] predictedVolume = predictVolume(scaleInputData(inputValues));
+                    Log.d("me predictedVolume", Arrays.toString(predictedVolume));
 
                     //show the result in the text view which was hidden from the beginning
                     //prediction result is in array format so we convert it to string
-                    result.setText("حجم تخمین زده شده درخت: " + Arrays.toString(predictedVolume));
-                    Log.d("predictedVolume", Arrays.toString(predictedVolume));
+                    result.setText("حجم تخمین زده شده درخت: " + Arrays.toString(reverseScalePrediction(predictedVolume)));
+                    Log.d("me reverse", Arrays.toString(reverseScalePrediction(predictedVolume)));
 
                     //show hidden text view containing the result
                     result.setVisibility(View.VISIBLE);
@@ -93,6 +94,17 @@ public class MainActivity extends AppCompatActivity {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         }
+    }
+
+    private double[] scaleInputData(double[] inputValues) {
+        inputValues[0] = (inputValues[0] - 436) / (3860 - 436);
+        inputValues[1] = (inputValues[1] - 13) / (47.8 - 13);
+        return inputValues;
+    }
+
+    private double[] reverseScalePrediction(double[] scaledPrediction) {
+        scaledPrediction[0] = scaledPrediction[0] * (31.914 - 0.087) + 0.087;
+        return scaledPrediction;
     }
 
     //importing the model created and trained in python from the exported file
