@@ -2,6 +2,8 @@
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <TextView
@@ -11,33 +13,33 @@
         android:layout_margin="10dp"
         android:text="Please enter the required prameters" />
 
-    <EditText
-        android:id="@+id/slope"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="slope" />
+<!--    <EditText-->
+<!--        android:id="@+id/slope"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:hint="شیب عرصه" />-->
 
     <EditText
         android:id="@+id/p_b_h"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="perimeter at breast height" />
+        android:hint="محیط در ارتفاع سینه(130 سانتی متر)" />
 
     <EditText
         android:id="@+id/tree_height"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="tree height (meters)" />
+        android:hint="ارتفاع درخت(متر)" />
 
-    <EditText
-        android:id="@+id/p_h_h"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="perimeter at 50cm height (milimeters)" />
+<!--    <EditText-->
+<!--        android:id="@+id/p_h_h"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:hint="محیط در نیم ارتفاع درخت(میلیمتر)" />-->
 
     <Button
         android:id="@+id/submit"
@@ -45,7 +47,7 @@
         android:layout_height="wrap_content"
         android:background="#5eba7d"
         android:textColor="#fff"
-        android:text="Predict tree volume" />
+        android:text="محاسبه حجم درخت" />
 
     <TextView
         android:id="@+id/result"

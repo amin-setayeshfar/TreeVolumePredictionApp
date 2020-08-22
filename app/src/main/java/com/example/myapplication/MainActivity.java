@@ -2,9 +2,11 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.TargetApi;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,9 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        forceRTLIfSupported();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("Tree Volume Prediction");
+        setTitle("محاسبه حجم تقریبی درخت");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#5eba7d")));
 
         //testing the model with sample data
@@ -37,9 +40,7 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d("prediction", Arrays.toString(prediction));
 
         //Declaring Input Element and Finding in Our Layout View by their id
-        final EditText slope=(EditText)findViewById(R.id.slope);
         final EditText perimeterAtBreastHeight=(EditText)findViewById(R.id.p_b_h);
-        final EditText perimeterAtHalfMeterHeight=(EditText)findViewById(R.id.p_h_h);
         final EditText treeHeight=(EditText)findViewById(R.id.tree_height);
         final TextView result=(TextView) findViewById(R.id.result);
 
@@ -54,25 +55,18 @@ public class MainActivity extends AppCompatActivity {
                 //Now Doing Some Validation to check if all required parameters are entered
                 //We Can Get Value of Edit Text By using method gettext
 
-                if(slope.getText().toString().isEmpty()){
-                    slope.setError("Please enter slope value");
-                }
-                else if(perimeterAtBreastHeight.getText().toString().isEmpty()){
-                    perimeterAtBreastHeight.setError("Please enter perimeter at breast height");
-                }
-                else if(perimeterAtHalfMeterHeight.getText().toString().isEmpty()){
-                    perimeterAtHalfMeterHeight.setError("Please enter perimeter at half meter height");
+                if(perimeterAtBreastHeight.getText().toString().isEmpty()){
+                    perimeterAtBreastHeight.setError("محیط در ارتفاع سینه را وارد کنید");
                 }
                 else if(treeHeight.getText().toString().isEmpty()){
-                    treeHeight.setError("Please enter tree height");
+                    treeHeight.setError("ارتفاع درخت را وارد کنید");
                 }
                 else{
                     //if all parameters are entered then we create the input array from the entered parameters in the text inputs
+                    //we read each input text and convert the string value to double(floating numbers)
                     double[] inputValues = {
-                        Double.parseDouble(slope.getText().toString()),
                         Double.parseDouble(perimeterAtBreastHeight.getText().toString()),
-                        Double.parseDouble(treeHeight.getText().toString()),
-                        Double.parseDouble(perimeterAtHalfMeterHeight.getText().toString())
+                        Double.parseDouble(treeHeight.getText().toString())
                     };
                     Log.d("inputValues", Arrays.toString(inputValues));
 
@@ -80,15 +74,25 @@ public class MainActivity extends AppCompatActivity {
                     double[] predictedVolume = predictVolume(inputValues);
 
                     //show the result in the text view which was hidden from the beginning
-                    result.setText("Predicted tree volume is: " + Arrays.toString(predictedVolume));
+                    //prediction result is in array format so we convert it to string
+                    result.setText("حجم تخمین زده شده درخت: " + Arrays.toString(predictedVolume));
                     Log.d("predictedVolume", Arrays.toString(predictedVolume));
 
                     //show hidden text view containing the result
                     result.setVisibility(View.VISIBLE);
                 }
+
             }
         });
 
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private void forceRTLIfSupported()
+    {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+        }
     }
 
     //importing the model created and trained in python from the exported file
