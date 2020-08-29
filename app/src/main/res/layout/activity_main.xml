@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layoutDirection="rtl"
     android:textDirection="rtl"
+    android:id="@+id/mainLayout"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <TextView
@@ -11,29 +14,102 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="لطفا پارامتر های زیر را وارد کنید" />
+        android:text="امیر حسین خطکه، منوچهر نمیرانیان"
+        android:textAlignment="center" />
 
-<!--    <EditText-->
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="amir.khetkeh@ut.ac.ir"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/utc"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:contentDescription="meter"
+            app:srcCompat="@drawable/utc"
+            tools:layout_editor_absoluteX="339dp" />
+
+        <ImageView
+            android:id="@+id/utca"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_toRightOf="@id/utc"
+            android:layout_weight="1"
+            android:contentDescription="meter"
+            app:srcCompat="@drawable/download__1_"
+            tools:layout_editor_absoluteX="339dp" />
+    </LinearLayout>
+
+    <!--    <EditText-->
 <!--        android:id="@+id/slope"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        android:layout_margin="10dp"-->
 <!--        android:hint="شیب عرصه" />-->
-
-    <EditText
-        android:id="@+id/p_b_h"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="محیط در ارتفاع سینه(130 سانتی متر)" />
+        android:text="لطفا پارامتر های زیر را وارد کنید یا با انتخاب دستگاه مورد نظر موارد خواسته شده را تکمیل کند" />
 
-    <EditText
-        android:id="@+id/tree_height"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="ارتفاع درخت(متر)" />
+        android:orientation="horizontal">
 
+        <ImageView
+            android:id="@+id/meter"
+            android:layout_width="72dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:contentDescription="meter"
+            app:srcCompat="@drawable/meter"
+            tools:layout_editor_absoluteX="339dp" />
+
+        <EditText
+            android:id="@+id/p_b_h"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="محیط در ارتفاع سینه(130 سانتی متر)"
+            android:layout_toRightOf="@id/meter" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/sonto"
+            android:layout_width="72dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:contentDescription="sonto"
+            app:srcCompat="@drawable/sonto"
+            tools:layout_editor_absoluteX="339dp" />
+
+        <EditText
+            android:id="@+id/tree_height"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="ارتفاع درخت(متر)"
+            android:layout_toRightOf="@id/sonto" />
+
+    </LinearLayout>
 <!--    <EditText-->
 <!--        android:id="@+id/p_h_h"-->
 <!--        android:layout_width="match_parent"-->
@@ -57,6 +133,5 @@
         android:visibility="gone"
         android:textColor="#5eba7d"
         android:textFontWeight="700"
-        android:textSize="50px"
-        android:text="Predicted tree volume is: " />
+        android:textSize="50px"/>
 </LinearLayout>

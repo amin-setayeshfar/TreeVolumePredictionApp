@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -12,6 +13,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.tensorflow.lite.Interpreter;
@@ -24,7 +28,6 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         forceRTLIfSupported();
@@ -32,20 +35,54 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("تخمین حجم درخت");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#5eba7d")));
-
-        //testing the model with sample data
-//        double[] inputValues = {17.4,266};
-//        double[] prediction=doInference(inputValues);
-//        Log.d("prediction", "hi");
-//        Log.d("prediction", Arrays.toString(prediction));
+        LinearLayout linearLayout;
+        linearLayout = findViewById(R.id.mainLayout);
+        linearLayout.setBackgroundColor(Color.WHITE);
+        //testing the moden", "hi");
+//        Log.d("predictiol with sample data
+//        float[][] inputValues = {{17.4f,0.266f}};
+//        String prediction = predictVolume(inputValues);
+//        Log.d("prediction", prediction);
 
         //Declaring Input Element and Finding in Our Layout View by their id
-        final EditText perimeterAtBreastHeight=(EditText)findViewById(R.id.p_b_h);
-        final EditText treeHeight=(EditText)findViewById(R.id.tree_height);
-        final TextView result=(TextView) findViewById(R.id.result);
+        final EditText perimeterAtBreastHeight = (EditText)findViewById(R.id.p_b_h);
+        final EditText treeHeight = (EditText)findViewById(R.id.tree_height);
+        final TextView result = (TextView) findViewById(R.id.result);
+        final ImageView sonto = (ImageView) findViewById(R.id.sonto);
+        final ImageView meter = (ImageView) findViewById(R.id.meter);
 
-        Button Submit=(Button)findViewById(R.id.submit);
+        Button Submit = (Button)findViewById(R.id.submit);
 
+        //to check if height is passed to activity
+        Intent intent = getIntent();
+        String height = intent.getStringExtra("height");
+        if (height!=null & height!="" && height.length()!=0) {
+            treeHeight.setText(height);
+        }
+
+        //to check if perimeter is passed to activity
+        String perimeter = intent.getStringExtra("perimeter");
+        if (perimeter!=null & perimeter!="" && perimeter.length()!=0) {
+            perimeterAtBreastHeight.setText(perimeter);
+        }
+
+        //Set On Click Listener For meter
+        meter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, MetersActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+
+        //Set On Click Listener For sonto
+        sonto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, SontoActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
 
         //Set On Click Listener For Button
         Submit.setOnClickListener(new View.OnClickListener() {
@@ -64,20 +101,20 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     //if all parameters are entered then we create the input array from the entered parameters in the text inputs
                     //we read each input text and convert the string value to double(floating numbers)
-                    double[] inputValues = {
-                        Double.parseDouble(perimeterAtBreastHeight.getText().toString()),
-                        Double.parseDouble(treeHeight.getText().toString())
-                    };
+                    float[][] inputValues ={ {
+                        Float.valueOf(perimeterAtBreastHeight.getText().toString()),
+                        Float.valueOf(treeHeight.getText().toString())
+                    }};
                     Log.d("me inputValues", Arrays.toString(inputValues));
 
                     //predict the tree volume based on the input data and store the result in predictedVolume
-                    double[] predictedVolume = predictVolume(scaleInputData(inputValues));
-                    Log.d("me predictedVolume", Arrays.toString(predictedVolume));
+                    String predictedVolume = predictVolume(scaleInputData(inputValues));
+                    Log.d("me predictedVolume", predictedVolume);
 
                     //show the result in the text view which was hidden from the beginning
                     //prediction result is in array format so we convert it to string
-                    result.setText("حجم تخمین زده شده درخت: " + Arrays.toString(reverseScalePrediction(predictedVolume)));
-                    Log.d("me reverse", Arrays.toString(reverseScalePrediction(predictedVolume)));
+                    result.setText("حجم تخمین زده شده درخت: " + predictedVolume);
+                    Log.d("me reverse", predictedVolume);
 
                     //show hidden text view containing the result
                     result.setVisibility(View.VISIBLE);
@@ -96,14 +133,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private double[] scaleInputData(double[] inputValues) {
-        inputValues[0] = (inputValues[0] - 436) / (3860 - 436);
-        inputValues[1] = (inputValues[1] - 13) / (47.8 - 13);
+    private float[][] scaleInputData(float[][] inputValues) {
+        inputValues[0][0] = (inputValues[0][0] - 436) / (3860 - 436);
+        inputValues[0][1] = (inputValues[0][1] - 13) / (47.8f - 13);
         return inputValues;
     }
 
-    private double[] reverseScalePrediction(double[] scaledPrediction) {
-        scaledPrediction[0] = scaledPrediction[0] * (31.914 - 0.087) + 0.087;
+    private float reverseScalePrediction(float scaledPrediction) {
+        scaledPrediction = scaledPrediction * (31.914f - 0.087f) + 0.087f;
+        Log.d("prediction scaled",Float.toString(scaledPrediction));
         return scaledPrediction;
     }
 
@@ -125,16 +163,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private double[] predictVolume (double[] input) {
+    private String predictVolume (float[][] input) {
         Interpreter tflite;
-        double[] output = new double[1];
+        float[][] output = new float[1][1];
         try {
             tflite = new Interpreter(loadModelFile());
             tflite.run(input,output);
-            return  output;
+            Log.d("prediction scaled",Float.toString(output[0][0]));
+            return  Float.toString(reverseScalePrediction(output[0][0]));
         }catch (Exception ex){
             ex.printStackTrace();
         }
-        return output;
+        return  Float.toString(reverseScalePrediction(output[0][0]));
+
     }
 }

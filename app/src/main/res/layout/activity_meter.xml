@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    android:id="@+id/meterLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="لطفا مقدار مربوط به ابزار مورد نظر خود را وارد کنید" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/navarImage"
+            android:layout_width="72dp"
+            android:layout_height="50dp"
+            android:contentDescription="meter"
+            app:srcCompat="@drawable/navar"
+            tools:layout_editor_absoluteX="339dp" />
+
+        <EditText
+            android:id="@+id/navar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="قطر با استفاده از نوار قطر سنج"
+            android:layout_toRightOf="@id/navarImage" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/dobazoImage"
+            android:layout_width="72dp"
+            android:layout_height="50dp"
+            android:contentDescription="meter"
+            app:srcCompat="@drawable/dobaazo"
+            tools:layout_editor_absoluteX="339dp" />
+
+        <EditText
+            android:id="@+id/dobazo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="قطر با استفاده از خطکش دوبازو"
+            android:layout_toRightOf="@id/meter" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#5eba7d"
+        android:textColor="#fff"
+        android:text="محاسبه و ثبت محیط" />
+
+</LinearLayout>
