@@ -61,7 +61,17 @@ public class SontoActivity extends AppCompatActivity {
                     double nok = Double.valueOf(toPersianNumber(nokEditText.getText().toString()));
                     double bon = Double.valueOf(toPersianNumber(bonEditText.getText().toString()));
                     Log.d("dd", String.valueOf(Math.cos(slope * (Math.PI / 180))));
-                    double height = (Math.abs(Math.abs(nok) - Math.abs(bon)) / 100) * horizontalDistance * Math.cos(slope * (Math.PI / 180));
+                    double parantes;
+                    if ((nok < 0 || bon < 0) && !(nok < 0 && bon < 0)) {
+                        parantes = Math.abs(Math.abs(nok) + Math.abs(bon));
+                    }
+                    else {
+                        parantes = Math.abs(Math.abs(nok) - Math.abs(bon));
+                    }
+
+                    Log.d("dd", String.valueOf(parantes));
+
+                    double height = (parantes / 100) * horizontalDistance * Math.cos(slope * (Math.PI / 180));
                     myIntent.putExtra("height", String.valueOf(String.format("%.2f", height)));
                     SontoActivity.this.startActivity(myIntent);
                 }

@@ -21,28 +21,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="فاصله افقی (متر)" />
+        android:hint="فاصله افقی (متر)"
+        android:textDirection="ltr"/>
 
     <EditText
         android:id="@+id/slope"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="شیب عرصه (درجه)" />
+        android:hint="شیب عرصه (درجه)"
+        android:textDirection="ltr"/>
 
     <EditText
         android:id="@+id/nok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="نوک (درصد)" />
+        android:hint="نوک (درصد)"
+        android:text="-100"
+        android:textDirection="ltr" />
 
     <EditText
         android:id="@+id/bon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="بن (درصد)" />
+        android:hint="بن (درصد)"
+        android:textDirection="ltr"/>
 
     <Button
         android:id="@+id/submit"
