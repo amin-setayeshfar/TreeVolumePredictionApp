@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //show the result in the text view which was hidden from the beginning
                     //prediction result is in array format so we convert it to string
-                    result.setText("حجم درخت راش مورد نظر " + predictedVolume + " مترمکعب میباشد");
+                    result.setText("حجم درخت راش مورد نظر " + predictedVolume + " مترمکعب می باشد");
                     Log.d("me reverse", predictedVolume);
 
                     //show hidden text view containing the result
@@ -170,11 +170,11 @@ public class MainActivity extends AppCompatActivity {
             tflite = new Interpreter(loadModelFile());
             tflite.run(input,output);
             Log.d("prediction scaled",Float.toString(output[0][0]));
-            return  Float.toString(reverseScalePrediction(output[0][0]));
+            return  String.format("%.3f", reverseScalePrediction(output[0][0]));
         }catch (Exception ex){
             ex.printStackTrace();
         }
-        return  Float.toString(reverseScalePrediction(output[0][0]));
+        return  String.format("%.3f", reverseScalePrediction(output[0][0]));
 
     }
 }

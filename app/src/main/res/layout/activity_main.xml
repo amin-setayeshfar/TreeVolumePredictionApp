@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="امیر حسین خطکه، منوچهر نمیرانیان"
+        android:text="امیر حسین خطکه. منوچهر نمیرانیان"
         android:textAlignment="center" />
 
     <TextView
@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="لطفا پارامتر های زیر را وارد کنید یا با انتخاب دستگاه مورد نظر موارد خواسته شده را تکمیل کند" />
+        android:text="لطفا پارامتر های زیر را وارد کنید یا با انتخاب دستگاه مورد نظر موارد خواسته شده را تکمیل نمایید" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -123,6 +123,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_weight="1"
+        android:textAlignment="center"
         android:textColor="#5eba7d"
         android:textFontWeight="700"
         android:textSize="50px"
