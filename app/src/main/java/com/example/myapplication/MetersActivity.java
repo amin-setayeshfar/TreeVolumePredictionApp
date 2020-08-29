@@ -39,13 +39,13 @@ public class MetersActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent myIntent = new Intent(MetersActivity.this, MainActivity.class);
                 if(!dobazoEditText.getText().toString().isEmpty()) {
-                    double dobazo = Double.valueOf(dobazoEditText.getText().toString().isEmpty() ? "0" : dobazoEditText.getText().toString());
+                    double dobazo = Double.valueOf(dobazoEditText.getText().toString().isEmpty() ? "0" : toPersianNumber(dobazoEditText.getText().toString()));
                     double perimeter =  dobazo * Math.PI;
                     myIntent.putExtra("perimeter", String.valueOf(String.format("%.2f", perimeter)));
                     MetersActivity.this.startActivity(myIntent);
                 }
                 else if(!navarEditText.getText().toString().isEmpty()) {
-                    double navar = Double.valueOf(navarEditText.getText().toString().isEmpty() ? "0" : navarEditText.getText().toString());
+                    double navar = Double.valueOf(navarEditText.getText().toString().isEmpty() ? "0" : toPersianNumber(navarEditText.getText().toString()));
                     double perimeter =  navar * Math.PI;
                     myIntent.putExtra("perimeter", String.valueOf(String.format("%.2f", perimeter)));
                     MetersActivity.this.startActivity(myIntent);
@@ -54,6 +54,16 @@ public class MetersActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String toPersianNumber(String input)
+    {
+        String[] persian = { "۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹" };
+
+        for (int j=0; j<persian.length; j++)
+            input = input.replace(persian[j], Integer.toString(j));
+
+        return input;
     }
 
     @Override

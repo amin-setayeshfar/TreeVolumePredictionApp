@@ -56,10 +56,10 @@ public class SontoActivity extends AppCompatActivity {
                     bonEditText.setError("لطفا بن را وارد نمایید");
                 }
                 else {
-                    double horizontalDistance = Double.valueOf(horizontalDistanceEditText.getText().toString());
-                    double slope = Double.valueOf(slopeEditText.getText().toString());
-                    double nok = Double.valueOf(nokEditText.getText().toString());
-                    double bon = Double.valueOf(bonEditText.getText().toString());
+                    double horizontalDistance = Double.valueOf(toPersianNumber(horizontalDistanceEditText.getText().toString()));
+                    double slope = Double.valueOf(toPersianNumber(slopeEditText.getText().toString()));
+                    double nok = Double.valueOf(toPersianNumber(nokEditText.getText().toString()));
+                    double bon = Double.valueOf(toPersianNumber(bonEditText.getText().toString()));
                     Log.d("dd", String.valueOf(Math.cos(slope * (Math.PI / 180))));
                     double height = (Math.abs(Math.abs(nok) - Math.abs(bon)) / 100) * horizontalDistance * Math.cos(slope * (Math.PI / 180));
                     myIntent.putExtra("height", String.valueOf(String.format("%.2f", height)));
@@ -68,6 +68,17 @@ public class SontoActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    private String toPersianNumber(String input)
+    {
+        String[] persian = { "۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹" };
+
+        for (int j=0; j<persian.length; j++)
+            input = input.replace(persian[j], Integer.toString(j));
+
+        return input;
     }
 
     @Override

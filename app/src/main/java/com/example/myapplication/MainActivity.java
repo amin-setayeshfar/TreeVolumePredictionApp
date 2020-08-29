@@ -102,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
                     //if all parameters are entered then we create the input array from the entered parameters in the text inputs
                     //we read each input text and convert the string value to double(floating numbers)
                     float[][] inputValues ={ {
-                        Float.valueOf(perimeterAtBreastHeight.getText().toString())*10,
-                        Float.valueOf(treeHeight.getText().toString())
+                        Float.valueOf(toPersianNumber(perimeterAtBreastHeight.getText().toString()))*10,
+                        Float.valueOf(toPersianNumber(treeHeight.getText().toString()))
                     }};
                     Log.d("me inputValues", Arrays.toString(inputValues));
 
@@ -123,6 +123,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String toPersianNumber(String input)
+    {
+        String[] persian = { "۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹" };
+
+        for (int j=0; j<persian.length; j++)
+            input = input.replace(persian[j], Integer.toString(j));
+
+        return input;
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -161,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return null;
     }
-
 
     private String predictVolume (float[][] input) {
         Interpreter tflite;
