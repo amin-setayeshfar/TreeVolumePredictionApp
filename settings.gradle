@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "Fagus or. volume predictor"
+rootProject.name = "Fagus Or. volume predictor"
