@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     //if all parameters are entered then we create the input array from the entered parameters in the text inputs
                     //we read each input text and convert the string value to double(floating numbers)
                     float[][] inputValues ={ {
-                        Float.valueOf(perimeterAtBreastHeight.getText().toString()),
+                        Float.valueOf(perimeterAtBreastHeight.getText().toString())*10,
                         Float.valueOf(treeHeight.getText().toString())
                     }};
                     Log.d("me inputValues", Arrays.toString(inputValues));
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //show the result in the text view which was hidden from the beginning
                     //prediction result is in array format so we convert it to string
-                    result.setText("حجم تخمین زده شده درخت: " + predictedVolume);
+                    result.setText("حجم درخت راش مورد نظر " + predictedVolume + " مترمکعب میباشد");
                     Log.d("me reverse", predictedVolume);
 
                     //show hidden text view containing the result

@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "Tree Volume Prediction"
+rootProject.name = "fagus or. volume predictor"

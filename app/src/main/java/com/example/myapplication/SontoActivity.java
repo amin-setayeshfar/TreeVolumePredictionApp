@@ -43,14 +43,28 @@ public class SontoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(SontoActivity.this, MainActivity.class);
-                double horizontalDistance = Double.valueOf(horizontalDistanceEditText.getText().toString());
-                double slope = Double.valueOf(slopeEditText.getText().toString());
-                double nok = Double.valueOf(nokEditText.getText().toString());
-                double bon = Double.valueOf(bonEditText.getText().toString());
-
-                double height =  (Math.abs(Math.abs(nok) - Math.abs(bon)) / 100) * horizontalDistance * Math.cos(slope);
-                myIntent.putExtra("height", String.valueOf(String.format("%.2f", height)));
-                SontoActivity.this.startActivity(myIntent);
+                if(horizontalDistanceEditText.getText().toString().isEmpty()) {
+                    horizontalDistanceEditText.setError("لطفا فاصله افقی را وارد نمایید");
+                }
+                else if(slopeEditText.getText().toString().isEmpty()) {
+                    slopeEditText.setError("لطفا شیب را وارد نمایید");
+                }
+                else if(nokEditText.getText().toString().isEmpty()) {
+                    nokEditText.setError("لطفا نوک را وارد نمایید");
+                }
+                else if(bonEditText.getText().toString().isEmpty()) {
+                    bonEditText.setError("لطفا بن را وارد نمایید");
+                }
+                else {
+                    double horizontalDistance = Double.valueOf(horizontalDistanceEditText.getText().toString());
+                    double slope = Double.valueOf(slopeEditText.getText().toString());
+                    double nok = Double.valueOf(nokEditText.getText().toString());
+                    double bon = Double.valueOf(bonEditText.getText().toString());
+                    Log.d("dd", String.valueOf(Math.cos(slope * (Math.PI / 180))));
+                    double height = (Math.abs(Math.abs(nok) - Math.abs(bon)) / 100) * horizontalDistance * Math.cos(slope * (Math.PI / 180));
+                    myIntent.putExtra("height", String.valueOf(String.format("%.2f", height)));
+                    SontoActivity.this.startActivity(myIntent);
+                }
             }
         });
 

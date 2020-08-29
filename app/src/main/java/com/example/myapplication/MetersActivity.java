@@ -38,12 +38,19 @@ public class MetersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(MetersActivity.this, MainActivity.class);
-                double dobazo = Double.valueOf(dobazoEditText.getText().toString().isEmpty() ? "0" : dobazoEditText.getText().toString());
-                double navar = Double.valueOf(navarEditText.getText().toString().isEmpty() ? "0" : navarEditText.getText().toString());
+                if(!dobazoEditText.getText().toString().isEmpty()) {
+                    double dobazo = Double.valueOf(dobazoEditText.getText().toString().isEmpty() ? "0" : dobazoEditText.getText().toString());
+                    double perimeter =  dobazo * Math.PI;
+                    myIntent.putExtra("perimeter", String.valueOf(String.format("%.2f", perimeter)));
+                    MetersActivity.this.startActivity(myIntent);
+                }
+                else if(!navarEditText.getText().toString().isEmpty()) {
+                    double navar = Double.valueOf(navarEditText.getText().toString().isEmpty() ? "0" : navarEditText.getText().toString());
+                    double perimeter =  navar * Math.PI;
+                    myIntent.putExtra("perimeter", String.valueOf(String.format("%.2f", perimeter)));
+                    MetersActivity.this.startActivity(myIntent);
+                }
 
-                double perimeter =  (dobazo!=0 ? dobazo : navar) * 3.14;
-                myIntent.putExtra("perimeter", String.valueOf(String.format("%.2f", perimeter)));
-                MetersActivity.this.startActivity(myIntent);
             }
         });
 

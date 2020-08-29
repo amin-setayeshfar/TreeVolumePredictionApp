@@ -13,7 +13,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="40dp"
         android:text="امیر حسین خطکه، منوچهر نمیرانیان"
         android:textAlignment="center" />
 
@@ -21,13 +21,14 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginBottom="40dp"
         android:text="amir.khetkeh@ut.ac.ir"
         android:textAlignment="center" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -60,7 +61,7 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         android:text="لطفا پارامتر های زیر را وارد کنید یا با انتخاب دستگاه مورد نظر موارد خواسته شده را تکمیل کند" />
 
     <LinearLayout
@@ -116,22 +117,24 @@
 <!--        android:layout_height="wrap_content"-->
 <!--        android:layout_margin="10dp"-->
 <!--        android:hint="محیط در نیم ارتفاع درخت(میلیمتر)" />-->
-
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#5eba7d"
-        android:textColor="#fff"
-        android:text="محاسبه حجم درخت" />
-
     <TextView
         android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:visibility="gone"
+        android:layout_weight="1"
         android:textColor="#5eba7d"
         android:textFontWeight="700"
-        android:textSize="50px"/>
+        android:textSize="50px"
+        android:visibility="invisible" />
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#5eba7d"
+        android:text="محاسبه حجم درخت"
+        android:textColor="#fff" />
+
+
 </LinearLayout>
