@@ -9,21 +9,6 @@
     android:id="@+id/mainLayout"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="امیر حسین خطکه. منوچهر نمیرانیان"
-        android:textAlignment="center" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:text="amir.khetkeh@ut.ac.ir"
-        android:textAlignment="center" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,14 +20,43 @@
             android:id="@+id/utc"
             android:layout_width="0dp"
             android:layout_height="100dp"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:contentDescription="meter"
             app:srcCompat="@drawable/utc"
             tools:layout_editor_absoluteX="339dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="امیر حسین خطکه. منوچهر نمیرانیان"
+                android:textAlignment="center" />
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="درس موضوع ویژه کارشناسی ارشد"
+                android:textAlignment="center" />
 
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:text="amir.khetkeh@ut.ac.ir"
+                android:textAlignment="center" />
+
+        </LinearLayout>
         <ImageView
             android:id="@+id/utca"
             android:layout_width="0dp"
+            android:layout_marginTop="20dp"
             android:layout_height="100dp"
             android:layout_toRightOf="@id/utc"
             android:layout_weight="1"

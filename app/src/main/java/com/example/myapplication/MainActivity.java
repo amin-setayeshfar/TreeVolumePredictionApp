@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         forceRTLIfSupported();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("تخمین حجم درخت");
+        setTitle("تخمین حجم درخت راش شرقی");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#5eba7d")));
         LinearLayout linearLayout;
         linearLayout = findViewById(R.id.mainLayout);
@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, SontoActivity.class);
+                myIntent.putExtra("perimeter",perimeterAtBreastHeight.getText().toString());
                 MainActivity.this.startActivity(myIntent);
             }
         });

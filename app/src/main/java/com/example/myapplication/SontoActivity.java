@@ -72,6 +72,9 @@ public class SontoActivity extends AppCompatActivity {
                     Log.d("dd", String.valueOf(parantes));
 
                     double height = (parantes / 100) * horizontalDistance * Math.cos(slope * (Math.PI / 180));
+                    Intent intent = getIntent();
+                    String perimeter = intent.getStringExtra("perimeter");
+                    myIntent.putExtra("perimeter", perimeter);
                     myIntent.putExtra("height", String.valueOf(String.format("%.2f", height)));
                     SontoActivity.this.startActivity(myIntent);
                 }
